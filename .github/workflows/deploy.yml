@@ -30,7 +30,7 @@ jobs:
         run: npm run build
         env:
           SITE: https://${{ github.repository_owner }}.github.io
-          BASE_PATH: /LAB2PUB2MKT-VS
+          BASE_PATH: /LAB2PUB2MKT-VS/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
