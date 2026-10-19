@@ -1,51 +1,87 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { sitePath } from '../utils/site-path';
 
-const cases = [
+const categories = [
   {
-    category: '需求探索',
-    title: '研究工具如何進入既有工作流程？',
-    image: '/images/research-workshop.jpg',
-    alt: '工作坊討論中的參與者與筆記資料',
-    summary: '情境草稿：練習從可能的使用者與日常流程出發，列出採用前需要理解的問題。沒有真實客戶或訪談結果。',
+    number: '01',
+    title: 'Research Translation & Commercialization',
+    focus: '學術成果轉化、研究成果商業化、產學合作',
   },
   {
-    category: '證據整理',
-    title: '技術成果如何對應實際應用條件？',
-    image: '/images/research-lab.jpg',
-    alt: '研究人員在實驗室觀察研究樣本',
-    summary: '情境草稿：練習區分已知證據、尚未驗證的主張與可能的應用條件。沒有實際技術、數據或導入成果。',
+    number: '02',
+    title: 'Research Design & Development',
+    focus: '研究問題釐清、研究設計、研究計畫落實',
+  },
+  {
+    number: '03',
+    title: 'Intellectual Property & Technology Transfer',
+    focus: '智慧財產權、技術移轉、技術授權',
+  },
+  {
+    number: '04',
+    title: 'Product Innovation & Development',
+    focus: '產品創新、產品開發、概念驗證',
+  },
+  {
+    number: '05',
+    title: 'Market Discovery & Opportunity Validation',
+    focus: '市場探索、需求驗證、競品分析、商業機會評估',
+  },
+  {
+    number: '06',
+    title: 'Business Model & Go-to-Market',
+    focus: '商業模式設計、商業策略、市場進入與推廣',
+  },
+  {
+    number: '07',
+    title: 'Interdisciplinary Collaboration & Innovation Solutions',
+    focus: '跨領域整合、專業協作、跨界創新與整合式解決方案',
   },
 ];
 ---
 
 <SiteLayout
-  title="FEATURED CASES｜研究轉譯情境草稿｜LAB2PUB2MKT"
-  description="研究轉譯情境練習草稿，明確區分示範內容與真實客戶案例。"
+  title="FEATURED CASES｜服務分類｜LAB2PUB2MKT"
+  description="從研究設計、技術移轉到市場驗證與商業化，了解 LAB2PUB2MKT 的七項服務分類。"
 >
   <header class="page-hero">
     <div>
-      <p class="eyebrow">FEATURED CASES / 情境練習</p>
-      <h1>用情境練習，呈現思考方式。</h1>
-      <p class="lede">這裡目前只有方法示範草稿，不代表真實客戶、合作、成效或研究成果。</p>
+      <p class="eyebrow">FEATURED CASES / 服務分類</p>
+      <h1>從研究成果，找到走向應用的路徑。</h1>
+      <p class="lede">依研究到商業化的不同關卡，整理可提供的服務方向。</p>
     </div>
-    <p class="page-hero-aside">每則示範都明確標註為草稿。取得可公開的真實資料與授權後，才會更新為正式案例。</p>
+    <p class="page-hero-aside">以下是服務分類，不代表已完成的客戶案例或實際成果。真實案例會在取得公開授權後加入。</p>
   </header>
 
-  <section class="section" aria-label="研究轉譯情境草稿">
+  <section class="section" aria-label="七項精選服務分類">
     <div class="case-grid">
-      {cases.map((item) => (
-        <article class="case-item">
-          <div class="case-image">
-            <img src={item.image} alt={item.alt} loading="lazy" width="1400" height="933" />
-            <span class="draft-stamp">情境草稿・非真實案例</span>
-          </div>
-          <div class="case-meta"><span>{item.category}</span><span>方法示範</span></div>
-          <h2>{item.title}</h2>
-          <p>{item.summary}</p>
+      {categories.map((category) => (
+        <article class="case-item case-category">
+          <div class="case-meta"><span>分類 {category.number}</span><span>服務方向</span></div>
+          <h2>{category.title}</h2>
+          <p>{category.focus}</p>
         </article>
       ))}
     </div>
-    <p class="draft-disclaimer">本頁沒有可引用的客戶名稱、成果數據或合作背書。情境文字僅用來說明可能的提問方式，不構成已完成服務或實際績效。</p>
+    <div class="draft-disclaimer">
+      <p>本頁整理的是服務分類，尚未呈現可公開的實際客戶案例、成果數據或合作背書。</p>
+      <a class="text-link" href={sitePath('/services/')}>查看各研究階段的瓶頸與服務流程</a>
+    </div>
   </section>
 </SiteLayout>
+
+<style>
+  .case-category {
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .case-category h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .case-category p {
+    max-width: 48ch;
+  }
+</style>
