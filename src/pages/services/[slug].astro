@@ -1,0 +1,146 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { serviceCategories } from '../../data/services';
+import { sitePath } from '../../utils/site-path';
+
+export function getStaticPaths() {
+  return serviceCategories.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const flowIndex = serviceCategories.findIndex((item) => item.slug === service.slug);
+const previousService = serviceCategories[flowIndex - 1];
+const nextService = serviceCategories[flowIndex + 1];
+---
+
+<SiteLayout
+  title={`${service.title}｜LAB2PUB2MKT`}
+  description={`${service.title}：${service.focus}。了解常見卡點、可討論的服務方向與可能交付物。`}
+>
+  <header class="page-hero service-detail-hero">
+    <div>
+      <p class="eyebrow"><a href={sitePath('/services/')}>服務流程</a> / 流程 {String(flowIndex + 1).padStart(2, '0')}</p>
+      <h1>{service.title}</h1>
+      <p class="lede">{service.focus}</p>
+    </div>
+    <p class="page-hero-aside">從目前的研究與合作情境出發，確認卡點，再選擇合適的下一步。實際服務範圍與交付內容需依需求討論。</p>
+  </header>
+
+  <section class="section service-detail" aria-label="服務內容">
+    <section class="service-detail-block" aria-labelledby="bottleneck-title">
+      <p class="eyebrow">01 / 先辨識卡點</p>
+      <h2 id="bottleneck-title">常見卡點</h2>
+      <p>{service.bottleneck}</p>
+    </section>
+
+    <section class="service-detail-block" aria-labelledby="service-title">
+      <p class="eyebrow">02 / 對應工作</p>
+      <h2 id="service-title">可討論的服務</h2>
+      <p>{service.service}</p>
+    </section>
+
+    <section class="service-detail-block" aria-labelledby="process-title">
+      <p class="eyebrow">03 / 工作路徑</p>
+      <h2 id="process-title">可能的進行步驟</h2>
+      <ol class="service-detail-steps">
+        {service.steps.map((step) => <li>{step}</li>)}
+      </ol>
+    </section>
+
+    <section class="service-detail-block" aria-labelledby="deliverables-title">
+      <p class="eyebrow">04 / 整理成果</p>
+      <h2 id="deliverables-title">可能的交付物</h2>
+      <ul class="service-deliverables">
+        {service.deliverables.map((deliverable) => <li>{deliverable}</li>)}
+      </ul>
+    </section>
+  </section>
+
+  <aside class="notice-band service-detail-note">
+    <p>上述內容是可討論的工作架構，不代表固定方案或成果保證。涉及智財、法律、投資或法規判斷時，應由合格專業人士確認。</p>
+    <a class="text-link" href={sitePath('/contact/')}>查看聯絡方式</a>
+  </aside>
+
+  <nav class="service-detail-pager" aria-label="服務流程導覽">
+    {previousService && <a href={sitePath(`/services/${previousService.slug}/`)}>← 上一步：{previousService.title}</a>}
+    <a href={sitePath('/services/')}>回到流程圖</a>
+    {nextService && <a href={sitePath(`/services/${nextService.slug}/`)}>下一步：{nextService.title} →</a>}
+  </nav>
+</SiteLayout>
+
+<style>
+  .service-detail-hero h1 {
+    overflow-wrap: anywhere;
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+  }
+
+  .service-detail {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 38px;
+  }
+
+  .service-detail-block {
+    padding: 28px 0 32px;
+    border-top: 1px solid var(--line);
+  }
+
+  .service-detail-block h2 {
+    margin-bottom: 14px;
+    font-size: 1.7rem;
+  }
+
+  .service-detail-block > p:last-child {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .service-detail-steps,
+  .service-deliverables {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding-left: 22px;
+  }
+
+  .service-detail-steps li,
+  .service-deliverables li {
+    padding-left: 5px;
+    color: var(--muted);
+  }
+
+  .service-detail-steps li::marker,
+  .service-deliverables li::marker {
+    color: var(--coral);
+    font-weight: 700;
+  }
+
+  .service-detail-pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px 24px;
+    padding: 24px clamp(20px, 8vw, 120px) 56px;
+  }
+
+  .service-detail-pager a {
+    color: var(--forest);
+    font-size: 13px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 700px) {
+    .service-detail {
+      grid-template-columns: 1fr;
+    }
+
+    .service-detail-pager {
+      flex-direction: column;
+    }
+  }
+</style>
