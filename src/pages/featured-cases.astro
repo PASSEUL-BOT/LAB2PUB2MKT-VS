@@ -1,44 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { serviceCategories } from '../data/services';
 import { sitePath } from '../utils/site-path';
-
-const categories = [
-  {
-    number: '01',
-    title: 'Research Translation & Commercialization',
-    focus: '學術成果轉化、研究成果商業化、產學合作',
-  },
-  {
-    number: '02',
-    title: 'Research Design & Development',
-    focus: '研究問題釐清、研究設計、研究計畫落實',
-  },
-  {
-    number: '03',
-    title: 'Intellectual Property & Technology Transfer',
-    focus: '智慧財產權、技術移轉、技術授權',
-  },
-  {
-    number: '04',
-    title: 'Product Innovation & Development',
-    focus: '產品創新、產品開發、概念驗證',
-  },
-  {
-    number: '05',
-    title: 'Market Discovery & Opportunity Validation',
-    focus: '市場探索、需求驗證、競品分析、商業機會評估',
-  },
-  {
-    number: '06',
-    title: 'Business Model & Go-to-Market',
-    focus: '商業模式設計、商業策略、市場進入與推廣',
-  },
-  {
-    number: '07',
-    title: 'Interdisciplinary Collaboration & Innovation Solutions',
-    focus: '跨領域整合、專業協作、跨界創新與整合式解決方案',
-  },
-];
 ---
 
 <SiteLayout
@@ -47,41 +10,116 @@ const categories = [
 >
   <header class="page-hero">
     <div>
-      <p class="eyebrow">FEATURED CASES / 服務分類</p>
-      <h1>從研究成果，找到走向應用的路徑。</h1>
-      <p class="lede">依研究到商業化的不同關卡，整理可提供的服務方向。</p>
+      <p class="eyebrow">FEATURED CASES / 精選範例類別</p>
+      <h1>選一個你目前卡住的關卡。</h1>
+      <p class="lede">七個服務類別各自對應不同研究與商業化問題；點選卡片查看服務流程與可能交付物。</p>
     </div>
-    <p class="page-hero-aside">以下是服務分類，不代表已完成的客戶案例或實際成果。真實案例會在取得公開授權後加入。</p>
+    <p class="page-hero-aside">目前先呈現服務類別，不冒充已完成的客戶案例。真實案例會在取得可公開資料與授權後加入。</p>
   </header>
 
   <section class="section" aria-label="七項精選服務分類">
-    <div class="case-grid">
-      {categories.map((category) => (
-        <article class="case-item case-category">
-          <div class="case-meta"><span>分類 {category.number}</span><span>服務方向</span></div>
-          <h2>{category.title}</h2>
-          <p>{category.focus}</p>
-        </article>
+    <div class="case-category-grid">
+      {serviceCategories.map((category) => (
+        <a class="case-category" href={sitePath(`/services/${category.slug}/`)}>
+          <span class="case-category-top"><span>{category.number}</span><span>服務類別</span></span>
+          <strong>{category.title}</strong>
+          <span class="case-category-focus">{category.focus}</span>
+          <span class="case-category-link">查看服務 <span aria-hidden="true">↗</span></span>
+        </a>
       ))}
     </div>
     <div class="draft-disclaimer">
-      <p>本頁整理的是服務分類，尚未呈現可公開的實際客戶案例、成果數據或合作背書。</p>
+      <p>本頁為服務分類入口，尚未呈現可公開的實際客戶案例、成果數據或合作背書。</p>
       <a class="text-link" href={sitePath('/services/')}>查看各研究階段的瓶頸與服務流程</a>
     </div>
   </section>
 </SiteLayout>
 
 <style>
-  .case-category {
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
+  .case-category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
   }
 
-  .case-category h2 {
+  .case-category {
+    display: flex;
+    min-height: 250px;
+    flex-direction: column;
+    gap: 16px;
+    padding: 23px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .case-category:nth-child(3n + 2) {
+    background: var(--mint);
+  }
+
+  .case-category:nth-child(3n) {
+    background: var(--sun);
+  }
+
+  .case-category:hover {
+    transform: translateY(-3px);
+    border-color: var(--forest);
+  }
+
+  .case-category:focus-visible {
+    outline: 3px solid var(--coral);
+    outline-offset: 3px;
+  }
+
+  .case-category-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--coral);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .case-category > strong {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    line-height: 1.3;
     overflow-wrap: anywhere;
   }
 
-  .case-category p {
-    max-width: 48ch;
+  .case-category-focus {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .case-category-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+    color: var(--forest);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .case-category-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .case-category-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .case-category {
+      min-height: 210px;
+    }
   }
 </style>
