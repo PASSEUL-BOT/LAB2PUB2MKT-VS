@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import { sitePath } from '../utils/site-path';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname.replace(import.meta.env.BASE_URL, '/');
+const navigation = [
+  { label: '首頁', href: '/' },
+  { label: '服務', href: '/services/' },
+  { label: 'FEATURED CASES', href: '/featured-cases/' },
+  { label: 'INSIGHT', href: '/insight/' },
+  { label: '專家團隊', href: '/expert-team/' },
+  { label: '推薦回饋', href: '/testimonials/' },
+  { label: '聯絡方式', href: '/contact/' },
+];
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f9faf6" />
+    <link rel="icon" type="image/svg+xml" href={sitePath('/favicon.svg')} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳至主要內容</a>
+    <header class="site-header">
+      <a class="brand" href={sitePath('/')} aria-label="LAB2PUB2MKT 首頁">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span class="brand-name">LAB2PUB2MKT</span>
+      </a>
+      <nav class="desktop-nav" aria-label="主要導覽">
+        {navigation.map((item) => (
+          <a
+            href={sitePath(item.href)}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+            class:list={[{ 'nav-english': item.label === 'FEATURED CASES' || item.label === 'INSIGHT' }]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label="開啟導覽選單">
+          <span></span>
+          <span></span>
+          <span class="visually-hidden">選單</span>
+        </summary>
+        <nav aria-label="行動版主要導覽">
+          {navigation.map((item) => (
+            <a
+              href={sitePath(item.href)}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+              class:list={[{ 'nav-english': item.label === 'FEATURED CASES' || item.label === 'INSIGHT' }]}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </details>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <a class="brand footer-brand" href={sitePath('/')}>
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span class="brand-name">LAB2PUB2MKT</span>
+      </a>
+      <p>讓研究與真實需求相遇。</p>
+      <nav aria-label="頁尾導覽">
+        <a href={sitePath('/services/')}>服務</a>
+        <a href={sitePath('/insight/')}>INSIGHT</a>
+        <a href={sitePath('/contact/')}>聯絡方式</a>
+      </nav>
+      <small>© 2026 LAB2PUB2MKT。網站內容持續整理中。</small>
+    </footer>
+  </body>
+</html>

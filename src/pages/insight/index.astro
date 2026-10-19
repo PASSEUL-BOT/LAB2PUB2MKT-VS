@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { sitePath } from '../../utils/site-path';
+
+const articles = (await getCollection('insight')).sort(
+  (first, second) => second.data.pubDate.valueOf() - first.data.pubDate.valueOf(),
+);
+const dateFormatter = new Intl.DateTimeFormat('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<SiteLayout
+  title="INSIGHT｜研究轉譯文章｜LAB2PUB2MKT"
+  description="從研究問題、證據整理到市場假設，以可檢視的方式思考研究成果如何走向應用。"
+>
+  <header class="page-hero">
+    <div>
+      <p class="eyebrow">INSIGHT / 研究轉譯筆記</p>
+      <h1>先整理問題，再談下一步。</h1>
+      <p class="lede">從需求探索到市場假設，讀一些可以拿回研究現場繼續思考的問題。</p>
+    </div>
+    <p class="page-hero-aside">文章提供一般性的思考架構，不構成技術、智財、法規、投資或市場成功保證。</p>
+  </header>
+
+  <section class="section" aria-label="研究轉譯文章列表">
+    <div class="article-list">
+      {articles.map((article) => (
+        <a class="article-row" href={sitePath(`/insight/${article.id}/`)}>
+          <time class="article-date" datetime={article.data.pubDate.toISOString()}>
+            {dateFormatter.format(article.data.pubDate)}
+          </time>
+          <span>
+            <h2>{article.data.title}</h2>
+            <p>{article.data.description}</p>
+          </span>
+          <span class="article-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

@@ -1,0 +1,83 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { sitePath } from '../utils/site-path';
+---
+
+<SiteLayout
+  title="LAB2PUB2MKT｜讓研究走向真實世界"
+  description="從問題定義、需求探索到市場驗證，整理研究成果走向應用的下一步。"
+>
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="hero-copy">
+      <p class="eyebrow">研究 × 應用 × 市場</p>
+      <h1 id="home-title">讓研究，走向真實世界。</h1>
+      <p class="lede">從一個值得理解的問題開始，梳理研究證據、應用情境與市場需求，讓下一步有跡可循。</p>
+      <a class="button-link button-link-light" href={sitePath('/services/')}>認識研究轉譯服務</a>
+      <p class="hero-note">先看清問題，再決定往哪裡走。</p>
+    </div>
+    <div class="hero-image">
+      <img
+        src={sitePath('/images/research-lab.jpg')}
+        alt="研究人員在實驗室中觀察樣本與研究資料"
+        fetchpriority="high"
+        width="2000"
+        height="1333"
+      />
+    </div>
+  </section>
+
+  <section class="section home-intro" aria-labelledby="intro-title">
+    <div>
+      <p class="eyebrow">從研究到應用</p>
+      <h2 id="intro-title">好研究值得被更多人理解。</h2>
+    </div>
+    <div>
+      <p>研究成果要走向實際應用，往往不只需要一個點子。還需要理解誰遇到什麼問題、現有證據能支持哪些主張，以及哪些條件仍待驗證。</p>
+      <p>LAB2PUB2MKT 整理研究轉譯的思考路徑，協助研究者與合作夥伴把不確定的下一步拆解成可討論、可檢視的工作。</p>
+      <a class="text-link" href={sitePath('/services/')}>查看服務如何對應研究階段</a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="stages-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">一段可以逐步釐清的路</p>
+        <h2 id="stages-title">研究轉譯，不必一步到位。</h2>
+      </div>
+      <a class="text-link" href={sitePath('/services/')}>瀏覽完整服務路徑</a>
+    </div>
+    <div class="stage-ribbon">
+      <a href={sitePath('/services/#stage-01')}><span>01 / 理解</span><strong>研究問題與需求</strong></a>
+      <a href={sitePath('/services/#stage-02')}><span>02 / 梳理</span><strong>證據與應用情境</strong></a>
+      <a href={sitePath('/services/#stage-03')}><span>03 / 探索</span><strong>利害關係人與價值</strong></a>
+      <a href={sitePath('/services/#stage-04')}><span>04 / 驗證</span><strong>市場假設與下一步</strong></a>
+    </div>
+  </section>
+
+  <section class="home-image-band" aria-labelledby="insight-band-title">
+    <img
+      src={sitePath('/images/research-workshop.jpg')}
+      alt="團隊成員圍坐交流，共同整理研究與應用想法"
+      loading="lazy"
+      width="1400"
+      height="933"
+    />
+    <div>
+      <p class="eyebrow">INSIGHT</p>
+      <h2 id="insight-band-title">把複雜的轉譯問題，拆成可思考的問題。</h2>
+      <p>從需求探索到市場假設，閱讀研究成果走向應用時值得先問的事。</p>
+      <a class="text-link" href={sitePath('/insight/')}>閱讀研究轉譯文章</a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cases-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">FEATURED CASES</p>
+        <h2 id="cases-title">以情境練習方法，不冒充真實成果。</h2>
+      </div>
+      <a class="text-link" href={sitePath('/featured-cases/')}>查看情境草稿</a>
+    </div>
+    <p class="lede">目前內容僅為研究轉譯情境草稿，並非實際客戶案例或已達成的成果。</p>
+  </section>
+</SiteLayout>

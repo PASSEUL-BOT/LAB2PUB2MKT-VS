@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { sitePath } from '../../utils/site-path';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('insight');
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const dateFormatter = new Intl.DateTimeFormat('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<SiteLayout title={`${article.data.title}｜INSIGHT｜LAB2PUB2MKT`} description={article.data.description}>
+  <article class="article-shell">
+    <div>
+      <header class="article-header">
+        <p class="eyebrow"><a href={sitePath('/insight/')}>INSIGHT / 研究轉譯筆記</a></p>
+        <h1>{article.data.title}</h1>
+        <p class="lede">{article.data.description}</p>
+        <time class="article-date" datetime={article.data.pubDate.toISOString()}>
+          {dateFormatter.format(article.data.pubDate)}
+        </time>
+      </header>
+      <div class="article-body"><Content /></div>
+    </div>
+    <aside class="article-aside" aria-label="延伸閱讀">
+      <h2>延伸閱讀</h2>
+      <a href={sitePath('/services/')}>服務階段與下一步</a>
+      <a href={sitePath('/featured-cases/')}>研究轉譯情境草稿</a>
+      <a href={sitePath('/contact/')}>聯絡資訊頁面</a>
+      <p>文章為一般性資訊，不保證商業成果、搜尋排名或人工智慧服務推薦。</p>
+    </aside>
+  </article>
+</SiteLayout>

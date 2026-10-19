@@ -1,0 +1,36 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { sitePath } from '../utils/site-path';
+---
+
+<SiteLayout
+  title="聯絡方式｜LAB2PUB2MKT"
+  description="LAB2PUB2MKT 正式聯絡管道尚待提供；本頁不收集個人資料。"
+>
+  <header class="page-hero">
+    <div>
+      <p class="eyebrow">聯絡方式 / 資訊待補</p>
+      <h1>從一個具體問題開始。</h1>
+      <p class="lede">正式聯絡方式尚未提供，因此本頁不放置虛構的電子郵件、電話或聯絡表單。</p>
+    </div>
+    <p class="page-hero-aside">聯絡管道由網站負責團隊確認後補上。此頁目前不會收件，也不會蒐集個人資料。</p>
+  </header>
+
+  <section class="section contact-grid" aria-label="聯絡資訊與合作準備">
+    <div class="contact-panel">
+      <p class="eyebrow">聯絡管道</p>
+      <h2>聯絡資訊待確認</h2>
+      <p>網站上線前，請由網站負責人提供並確認正式聯絡方式，再替換此佔位內容。請勿把個人聯絡資料直接填入公開版本，除非已確認願意公開。</p>
+      <a class="text-link" href={sitePath('/services/')}>先了解服務階段</a>
+    </div>
+    <div>
+      <p class="eyebrow">合作前可以整理</p>
+      <h2>先把問題說清楚。</h2>
+      <ol class="contact-steps">
+        <li>目前的研究主題與已經取得的證據。</li>
+        <li>希望理解的使用者、場景或應用問題。</li>
+        <li>目前最需要釐清、且還沒有答案的地方。</li>
+      </ol>
+    </div>
+  </section>
+</SiteLayout>

@@ -1,0 +1,51 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const cases = [
+  {
+    category: '需求探索',
+    title: '研究工具如何進入既有工作流程？',
+    image: '/images/research-workshop.jpg',
+    alt: '工作坊討論中的參與者與筆記資料',
+    summary: '情境草稿：練習從可能的使用者與日常流程出發，列出採用前需要理解的問題。沒有真實客戶或訪談結果。',
+  },
+  {
+    category: '證據整理',
+    title: '技術成果如何對應實際應用條件？',
+    image: '/images/research-lab.jpg',
+    alt: '研究人員在實驗室觀察研究樣本',
+    summary: '情境草稿：練習區分已知證據、尚未驗證的主張與可能的應用條件。沒有實際技術、數據或導入成果。',
+  },
+];
+---
+
+<SiteLayout
+  title="FEATURED CASES｜研究轉譯情境草稿｜LAB2PUB2MKT"
+  description="研究轉譯情境練習草稿，明確區分示範內容與真實客戶案例。"
+>
+  <header class="page-hero">
+    <div>
+      <p class="eyebrow">FEATURED CASES / 情境練習</p>
+      <h1>用情境練習，呈現思考方式。</h1>
+      <p class="lede">這裡目前只有方法示範草稿，不代表真實客戶、合作、成效或研究成果。</p>
+    </div>
+    <p class="page-hero-aside">每則示範都明確標註為草稿。取得可公開的真實資料與授權後，才會更新為正式案例。</p>
+  </header>
+
+  <section class="section" aria-label="研究轉譯情境草稿">
+    <div class="case-grid">
+      {cases.map((item) => (
+        <article class="case-item">
+          <div class="case-image">
+            <img src={item.image} alt={item.alt} loading="lazy" width="1400" height="933" />
+            <span class="draft-stamp">情境草稿・非真實案例</span>
+          </div>
+          <div class="case-meta"><span>{item.category}</span><span>方法示範</span></div>
+          <h2>{item.title}</h2>
+          <p>{item.summary}</p>
+        </article>
+      ))}
+    </div>
+    <p class="draft-disclaimer">本頁沒有可引用的客戶名稱、成果數據或合作背書。情境文字僅用來說明可能的提問方式，不構成已完成服務或實際績效。</p>
+  </section>
+</SiteLayout>

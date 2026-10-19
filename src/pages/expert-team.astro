@@ -1,0 +1,32 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const profiles = ['01', '02', '03'];
+---
+
+<SiteLayout
+  title="專家團隊｜LAB2PUB2MKT"
+  description="團隊成員姓名、專業領域與經歷待本人確認後更新。"
+>
+  <header class="page-hero">
+    <div>
+      <p class="eyebrow">專家團隊 / 資料整理中</p>
+      <h1>專業，先從真實介紹開始。</h1>
+      <p class="lede">團隊成員與專業領域將在取得本人確認後刊載。</p>
+    </div>
+    <p class="page-hero-aside">目前不刊登未經確認的姓名、學歷、職稱、機構、年資或合作經歷。</p>
+  </header>
+
+  <section class="section" aria-label="待確認的團隊介紹欄位">
+    <div class="team-list">
+      {profiles.map((number) => (
+        <article class="team-placeholder">
+          <span class="team-number">資料欄位 {number}</span>
+          <h2>成員介紹待提供</h2>
+          <p>姓名、專業領域與經歷待本人確認。</p>
+        </article>
+      ))}
+    </div>
+    <p class="team-note">正式發布前，請逐一確認每位成員的介紹文字、職稱與照片使用權。未確認前，以上欄位只是編輯佔位內容。</p>
+  </section>
+</SiteLayout>
